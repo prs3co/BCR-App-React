@@ -1,11 +1,19 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
-export default function Counter() {
-    const [count, setCount] = useState(0)
+interface CounterProps {
+  startCount: number
+}
+
+export default function Counter({ startCount } : Readonly<CounterProps>) {
+  const [count, setCount] = useState(startCount)
+
+  function incrementHandler() {
+    setCount((count) => count + 1)
+  }
 
   return (
     <div>
-      <button onClick={() => setCount((count) => count + 1)}>
+      <button onClick={incrementHandler}>
         count is {count}
       </button>
     </div>
