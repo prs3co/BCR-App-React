@@ -1,38 +1,35 @@
 import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../src/assets/styles/reset.css'
+import '../src/assets/styles/style.css'
 import { Routes, Route } from 'react-router-dom'
-import Layout from './components/layout'
-import Home from './pages/home'
-import About from './pages/about'
+import Layout from './components/Layout'
+import Home from './pages/Home'
+import { AuthProvider } from './hooks/useAuth';
+import Login from './pages/dashboard/Login';
+// import DashboardLayout from './components/DashboardLayout';
+import Dashboard from './pages/dashboard';
+import Protected from './components/Protected';
+import Cars from './pages/Cars';
 
 function App() {
 
   return (
-    <>
-      {/* <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <Counter startCount={10} />
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p> */}
+    <AuthProvider>
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path='why' element={<About />} />
+          <Route path='cars' element={<Cars />} />
         </Route>
+        <Route path='/dashboard' >
+          <Route index element={
+            <Protected>
+              <Dashboard />
+            </Protected>} />
+          <Route path='login' element={<Login />} />
+        </Route >
       </Routes>
-    </>
+    </AuthProvider>
   )
 }
 
