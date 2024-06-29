@@ -11,6 +11,7 @@ import Login from './pages/dashboard/Login';
 import Dashboard from './pages/dashboard';
 import Protected from './components/Protected';
 import Cars from './pages/Cars';
+import DashboardLayout from './components/DashboardLayout';
 
 function App() {
 
@@ -21,11 +22,12 @@ function App() {
           <Route index element={<Home />} />
           <Route path='cars' element={<Cars />} />
         </Route>
-        <Route path='/dashboard' >
+        <Route path='/dashboard' element={<DashboardLayout />}>
           <Route index element={
-            <Protected>
+            // <Protected>
               <Dashboard />
-            </Protected>} />
+            // </Protected>
+          } />
           <Route path='login' element={<Login />} />
         </Route >
       </Routes>
